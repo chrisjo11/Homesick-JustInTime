@@ -6,10 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
     float horizontalMove = 0f;
-    public float playerRunSpeed = 40;
+    public float playerRunSpeed = 60;
     bool isJumping;
-    bool isCrouching;
-    bool isGrounded;
     public GameObject player;
     public GameObject ground;
 
@@ -25,25 +23,18 @@ public class PlayerMovement : MonoBehaviour
         // Get Horizontal Axis Movement
         horizontalMove = Input.GetAxisRaw("Horizontal") * playerRunSpeed;
 
-        
-
         // Check for Jump/Crouch Input
         if (Input.GetButtonDown("Jump"))
         {
             isJumping = true;
-        }
-        if (Input.GetButtonDown("Crouch"))
-        {
-            isCrouching = true;
         }
     }
 
     private void FixedUpdate() // Use to apply input
     {
         // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, isCrouching, isJumping);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, isJumping);
         isJumping = false;
-        isCrouching = false;
         Debug.Log("stuff");
     }
 
