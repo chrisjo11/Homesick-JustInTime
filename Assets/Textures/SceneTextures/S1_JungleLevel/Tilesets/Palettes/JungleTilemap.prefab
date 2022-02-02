@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 506005719445164522}
   - component: {fileID: 2129542881197193068}
   m_Layer: 31
-  m_Name: groundJungleTilemap
+  m_Name: JungleTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
