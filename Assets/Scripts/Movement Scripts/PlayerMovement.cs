@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     public float playerRunSpeed = 60;
     bool isJumping;
+    bool isOnGround;
     public GameObject player;
     public GameObject ground;
 
@@ -36,14 +37,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, isJumping);
         isJumping = false;
         Debug.Log("stuff");
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Ground")
-        {
-            Debug.Log("is ground");
-        }
-        
+        Debug.Log(isOnGround);
     }
 }

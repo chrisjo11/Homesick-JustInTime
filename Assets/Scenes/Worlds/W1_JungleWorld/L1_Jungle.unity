@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 858296962}
   - component: {fileID: 858296964}
   - component: {fileID: 858296963}
+  - component: {fileID: 858296965}
   m_Layer: 0
   m_Name: jungleBackground
   m_TagString: Untagged
@@ -344,6 +345,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &858296965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858296961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e812b6e23afce534184798774af0cb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1352745366
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +374,7 @@ GameObject:
   - component: {fileID: 1352745373}
   - component: {fileID: 1352745374}
   - component: {fileID: 1352745375}
+  - component: {fileID: 1352745376}
   m_Layer: 7
   m_Name: Rob
   m_TagString: Untagged
@@ -658,6 +672,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1352745376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352745366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e812b6e23afce534184798774af0cb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1527596513
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +809,7 @@ GameObject:
   - component: {fileID: 2120695737}
   - component: {fileID: 2120695736}
   - component: {fileID: 2120695738}
+  - component: {fileID: 2120695739}
   m_Layer: 0
   m_Name: jungleGround
   m_TagString: Ground
@@ -19430,3 +19457,15 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &2120695739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120695734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e812b6e23afce534184798774af0cb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
