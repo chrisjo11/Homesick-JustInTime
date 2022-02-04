@@ -5,24 +5,31 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - Orphan
+  - Background
+  - Foreground
+  - Collectable
+  - Objective
+  - Powerup
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Ground
-  - Player
+  - 
   - Obstacle
   - 
+  - Item
+  - Objective
   - 
+  - Enemy
+  - Player
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Foreground
   - 
   - 
   - 
