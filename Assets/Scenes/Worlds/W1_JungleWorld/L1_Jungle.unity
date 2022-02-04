@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 1352745374}
   - component: {fileID: 1352745375}
   - component: {fileID: 1352745376}
+  - component: {fileID: 1352745377}
   m_Layer: 7
   m_Name: Rob
   m_TagString: Untagged
@@ -394,9 +395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabeb31353c65344d818c7d46fe2e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 700
+  m_JumpForce: 1100
   m_CrouchSpeed: 0.4
-  m_MovementSmoothing: 0.086
+  m_MovementSmoothing: 0
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
@@ -535,7 +536,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 9
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -554,7 +555,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1352745367}
+  horizontalMove: 0
   playerRunSpeed: 40
+  isJumping: 0
+  isOnGround: 0
   player: {fileID: 1352745370}
   ground: {fileID: 0}
 --- !u!95 &1352745374
@@ -589,7 +593,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: be2d59d4f2886bf4f98e58ee9e36bf73, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.035
-  m_Pitch: 0.54
+  m_Pitch: 0.75
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -684,6 +688,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812b6e23afce534184798774af0cb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1352745377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352745366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241fc4600b2b6204986bb3174a597627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnGround: 0
+  controller: {fileID: 1352745367}
 --- !u!1 &1527596513
 GameObject:
   m_ObjectHideFlags: 0
