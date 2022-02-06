@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : Actor
 {
     // Player Booleans
 
     private bool isJumping;
-    private bool hasLost;
+    private bool canMove;
+    private bool tookDamage;
 
-    // Player Number Vars
-    
-    private int health = 20;
-    private bool losthealth = false;
+    // Player Static Vars
+
+    private static int MAX_HEALTH = 5;
+    private static float playerRunSpeed = 50; // Sets the player's run speed
 
     // Player Input Vars
 
@@ -20,104 +22,151 @@ public class Player : Actor
 
     // Player Inventory
 
-    private List<GameObject> inventory = new List<GameObject>(); // List of the player's auired GameObjects
-    private GameObject equippedItem;
+    public GameObject inventoryDisplay;
+    private List<Collectable> inventory = new List<Collectable>(); // List of the player's aquired GameObjects
+    private Collectable equippedItem;
+    private bool isInventoryOn;
 
-    // Player Character Controller
+    // Player healthDisplay
 
-    public CharacterController2D controller; // Gets the movement controller
+    private int health = MAX_HEALTH;
+    public TextMeshProUGUI healthDisplay;
 
-    // Player Static Variables
+    // Two-player accesses
 
-    private static float playerRunSpeed = 50; // Sets the player's run speed
+    public GameObject otherPlayer;
+    public GameObject otherFacade;
+    public GameObject thisPlayer;
+    public GameObject thisFacade;
 
-    void addToInventory(GameObject item)
-    { // Adds a given GameObject to a player
-        if(!(item.gameObject.tag == "collectable"))
-        {
-            Debug.Log("wtf");
-        }
+    private void switchPlayer()
+    {
+        otherPlayer.transform.position = otherFacade.transform.position;
+        thisFacade.transform.position = thisPlayer.transform.position;
+        otherPlayer.SetActive(true);
+        otherFacade.SetActive(false);
+        thisFacade.SetActive(true);
+        thisPlayer.SetActive(false);
+    }
+
+    private void addToInventory(Collectable item) // Adds a given GameObject to a player's inventory
+    { 
         inventory.Add(item);
     }
 
-    void equipItem(int index) // Equps an item from the players inventory given an integer index
+    private void equipItem(int index) // Equps an item from the players inventory given an integer index
     {
         equippedItem = inventory[index];
     }
 
-    void displayInventory() // Displays the player's inventory
+    private void displayInventory(bool onStatus) // Displays the player's inventory
     {
+        isInventoryOn = onStatus;
+        canMove = !onStatus;
 
+        inventoryDisplay.SetActive(onStatus);
     }
 
-    void checkInput() // Checks for Input
+    private void updatehealthDisplay(int health)
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * playerRunSpeed; // Set Horizontal Input
-
-        if (Input.GetButtonDown("Jump")) // Check for Jump Input
+        if(health >= 0)
         {
-            isJumping = true;
+            healthDisplay.text = "Health: " + health;
         }
     }
 
-    void checkStatus() { // Checks the player's status
-        if(health <= 0)
+    private void checkInput() // Checks for Input
+    {
+        if (canMove) // If the player can move, sets horizontal movement vector to the horizontal input, if not, sets the horizontal movement vector to 0
         {
-            Lose();
-            Debug.Log("you lost");
+            horizontalMove = Input.GetAxisRaw("Horizontal") * playerRunSpeed;
+        } else
+        {
+            horizontalMove = 0;
+        }
+
+        if (Input.GetButtonDown("Jump")) isJumping = true; // Sets jumping to true when jump input is checked
+
+        if (Input.GetButtonDown("Inventory")) // Flips the inventory display from on/off the screen when inventory input is checked
+        {
+            if(!isInventoryOn)
+            {
+                displayInventory(true);
+            } else
+            {
+                displayInventory(false);
+            }
+        }
+
+        if (Input.GetButtonDown("Switch"))
+        {
+            switchPlayer();
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col) // Runs when this GameObject collides
+    private void checkStatus() { // Checks the player's status
+        if(health <= 0) Lose();
+
+    }
+
+    private void updateStatus()
     {
-        if (col.gameObject.tag == "Ground")
+        if(tookDamage) // Updates the heart display whenever player takes damage
         {
-            isOnGround = true;
+            updatehealthDisplay(health);
+            tookDamage = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col) // Runs when this GameObject collides
+    {
+        if (col.gameObject.tag == "Ground") isOnGround = true;
         if (col.gameObject.tag == "Orphan")
         {
             health--;
+            tookDamage = true;
             Debug.Log("you lost health");
         }
-    }
-
-    void OnCollisionExit2D(Collision2D col) // Runs when this GameObject exits collision
-    {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "MegaOrphan")
         {
-            isOnGround = false;
+            health = 0;
+            tookDamage = true;
         }
     }
 
-    void Lose() // Lose is called when the player has 0 or less health.
+    private void OnCollisionExit2D(Collision2D col) // Runs when this GameObject exits collision
+    {
+        if (col.gameObject.tag == "Ground") isOnGround = false;
+    }
+
+    private void Lose() // Lose is called when the player has 0 or less health.
     { 
         Debug.Log("lmao you're trash");
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        displayInventory(false);
     }
 
     // Update is called once per frame
-    void Update() // Used to get input
+    private void Update() // Used to get input
     {
-        // Check for input
+        // Check for inputs
         checkInput();
 
-        // Check for status
+        // Check for statuses
         checkStatus();
 
-        Debug.Log(losthealth);
-
+        // Update statuses
+        updateStatus();
     }
 
-    void FixedUpdate() // Use to apply input
+    private void FixedUpdate() // Use to apply input
     {
         // Move our character
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, isJumping);
         isJumping = false;
-        Debug.Log(isOnGround);
     }
 }

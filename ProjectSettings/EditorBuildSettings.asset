@@ -27,9 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Worlds/W3_CityWorld/L1_City.unity
     guid: 76a1191b2c5dd5f4683a60a1129ab20d
   - enabled: 1
-    path: Assets/Scenes/Misc/Credits.unity
-    guid: 5e5fa6060cd8fb44eb032ee392b9599d
-  - enabled: 1
     path: Assets/Scenes/Worlds/W4_JunkyardWorld/L1_Junkyard.unity
     guid: 2a7b7fc957bcd894e836d21ff490eeab
+  - enabled: 1
+    path: Assets/Scenes/Misc/Credits.unity
+    guid: 5e5fa6060cd8fb44eb032ee392b9599d
   m_configObjects: {}

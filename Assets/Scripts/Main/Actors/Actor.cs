@@ -1,14 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public bool isOnGround;
+    protected bool isOnGround;
+    public CharacterController2D controller; // Gets the movement controller
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground") // Check if touching the ground
         {
             isOnGround = true;
         }
@@ -16,21 +16,9 @@ public class Actor : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground") // Check if leaving the ground
         {
             isOnGround = false;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainScreenScript : MonoBehaviour
@@ -8,6 +7,7 @@ public class MainScreenScript : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("works");
         screen.SetActive(false);
     }
 }
