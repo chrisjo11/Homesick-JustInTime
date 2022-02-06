@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TodMovement : MonoBehaviour
 {
-    private int speed = 20;
-
     public CharacterController2D controller; // Gets the movement controller
 
     public GameObject rob;

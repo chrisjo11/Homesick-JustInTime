@@ -9,6 +9,7 @@ public class CameraScript : MonoBehaviour
     public GameObject rob;
     public GameObject tod;
     public Camera cam;
+    public GameObject screen;
 
     void Start()
     {
@@ -34,8 +35,9 @@ public class CameraScript : MonoBehaviour
             {
                 transform.position += new Vector3(0, (dy/1.5f) * Time.deltaTime, 0);
             }
+            if(transform.position.y >= 5.75)
             {
-                
+                screen.SetActive(true);
             }
         }
     }
