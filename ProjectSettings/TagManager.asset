@@ -12,6 +12,8 @@ TagManager:
   - Collectable
   - Objective
   - Powerup
+  - Rob
+  - Tod
   layers:
   - Default
   - TransparentFX

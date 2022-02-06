@@ -21,6 +21,7 @@ public class Player : Actor
     // Player Inventory
 
     private List<GameObject> inventory = new List<GameObject>(); // List of the player's auired GameObjects
+    private GameObject equippedItem;
 
     // Player Character Controller
 
@@ -30,11 +31,23 @@ public class Player : Actor
 
     private static float playerRunSpeed = 50; // Sets the player's run speed
 
-    void addToInventory(GameObject item) { // Adds a given GameObject to a player
-        if(!(item.gameObject.tag == "collectable")) {
+    void addToInventory(GameObject item)
+    { // Adds a given GameObject to a player
+        if(!(item.gameObject.tag == "collectable"))
+        {
             Debug.Log("wtf");
         }
         inventory.Add(item);
+    }
+
+    void equipItem(int index) // Equps an item from the players inventory given an integer index
+    {
+        equippedItem = inventory[index];
+    }
+
+    void displayInventory() // Displays the player's inventory
+    {
+
     }
 
     void checkInput() // Checks for Input
@@ -48,8 +61,10 @@ public class Player : Actor
     }
 
     void checkStatus() { // Checks the player's status
-        if(health <= 0) {
+        if(health <= 0)
+        {
             Lose();
+            Debug.Log("you lost");
         }
     }
 
@@ -59,8 +74,10 @@ public class Player : Actor
         {
             isOnGround = true;
         }
-        if (col.gameObject.tag == "Orphan") {
+        if (col.gameObject.tag == "Orphan")
+        {
             health--;
+            Debug.Log("you lost health");
         }
     }
 
@@ -72,7 +89,8 @@ public class Player : Actor
         }
     }
 
-    void Lose() { // Lose is called when the player has 0 or less health.
+    void Lose() // Lose is called when the player has 0 or less health.
+    { 
         Debug.Log("lmao you're trash");
     }
 
