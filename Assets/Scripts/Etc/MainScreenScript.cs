@@ -7,7 +7,6 @@ public class MainScreenScript : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("works");
         screen.SetActive(false);
     }
 }
