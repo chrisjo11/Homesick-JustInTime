@@ -46,6 +46,7 @@ public class JungleSceneManager : MonoBehaviour
     {
         if(rob.gameObject.transform.position.x > 25) // Condition for the scene to begin
         {
+            runScene(0);
             runScene(0); // run the scene
             if (Input.GetButtonDown("Skip"))
             {

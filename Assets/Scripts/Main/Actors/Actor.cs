@@ -8,15 +8,25 @@ public class Actor : MonoBehaviour
     protected bool canMove = true;
     protected static bool canInput = true;
 
+    private static bool stoppedSaying = false;
+
     public static bool isSaying;
     public CharacterController2D controller; // Gets the movement controller
-    protected static TextManager textManager;
+    public TextManager textManager;
 
     private void Start()
     {
-        textManager = GameObject.FindGameObjectWithTag("TextManager").GetComponent<TextManager>();
+        //textManager = GameObject.FindGameObjectWithTag("TextManager").GetComponent<TextManager>();
         canMove = true;
         canInput = true;
+    }
+
+    private void Update()
+    {
+        if(stoppedSaying)
+        {
+            textManager.gameObject.SetActive(false);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -39,13 +49,14 @@ public class Actor : MonoBehaviour
     {
         isSaying = true;
         canInput = false;
+        stoppedSaying = false;
     }
 
     public static void stopSaying()
     {
         isSaying = false;
         canInput = true;
-        textManager.destroyMessage();
+        stoppedSaying = true;
     }
 
     protected void say(string script, string tag)
@@ -55,10 +66,5 @@ public class Actor : MonoBehaviour
             startSaying();
         }
         textManager.displayMessage(tag + ": " + script);
-    }
-
-    private void Update()
-    {
-        
     }
 }
