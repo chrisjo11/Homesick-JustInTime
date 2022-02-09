@@ -39,11 +39,38 @@ public class Player : Actor
     public GameObject thisPlayer;
     public GameObject thisFacade;
 
+    // Camera accesses
+
+    public GameObject[] cameras;
+
     // Player Sounds
     public AudioSource ouch;
     public AudioSource speechNormal;
     public AudioSource speechAngry;
     public AudioSource speechHappy;
+
+    public void activateFacades(int scene)
+    {
+        if(!isSaying)
+        {
+            // Set positions equal
+            otherPlayer.transform.position = otherFacade.transform.position;
+            thisFacade.transform.position = thisPlayer.transform.position;
+
+            // Activates the other player, inactivates the other player's facade
+            thisFacade.SetActive(true);
+            otherFacade.SetActive(true);
+
+            cameras[scene].SetActive(true);
+
+            // Activates the current player's facade, inactivates the current player
+            otherPlayer.SetActive(false);
+            thisPlayer.SetActive(false);
+        } else if(isSaying)
+        {
+
+        }
+    }
 
     private void switchPlayer() // Switches the current player
     {
@@ -116,6 +143,11 @@ public class Player : Actor
                 displayInventory(false);
             }
         }
+
+        if(Input.GetButtonDown("Enable Debug Button 1"))
+        {
+            say("i can talk");
+        }
     }
 
     private void checkStatus() // Checks the player's status 
@@ -170,6 +202,11 @@ public class Player : Actor
         displayInventory(false); // Initialize the player's inventory as inactive
 
         updateHealthDisplay(health); // Initially update the player's health display
+
+        foreach (GameObject g in cameras)
+        {
+            g.SetActive(false);
+        }
     }
 
     private void Start() // Called before the first frame update

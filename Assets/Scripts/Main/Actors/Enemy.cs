@@ -7,6 +7,7 @@ public class Enemy : Actor
     public int damage;
     public float speed;
     public int maxHealth;
+    public string nametag;
 
     public GameObject lowBound;
     public GameObject highBound;
@@ -39,5 +40,4 @@ public class Enemy : Actor
         controller.Move(speed * direction * Time.deltaTime, false, false);
 
     }
-
 }
