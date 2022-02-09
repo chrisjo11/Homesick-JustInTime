@@ -15,6 +15,7 @@ TagManager:
   - Rob
   - Tod
   - MegaOrphan
+  - TextManager
   layers:
   - Default
   - TransparentFX

@@ -8,13 +8,13 @@ public class Player : Actor
     // Player Booleans
 
     private bool isJumping;
-    private bool canMove;
     private bool tookDamage;
 
     // Player Static Vars
 
     private static int MAX_HEALTH = 20; // Sets the player's max health
     private static float playerRunSpeed = 60; // Sets the player's run speed
+    private static bool isTod = false;
 
     // Player Input Vars
 
@@ -39,36 +39,23 @@ public class Player : Actor
     public GameObject thisPlayer;
     public GameObject thisFacade;
 
-    // Camera accesses
-
-    public GameObject[] cameras;
-
     // Player Sounds
     public AudioSource ouch;
     public AudioSource speechNormal;
     public AudioSource speechAngry;
     public AudioSource speechHappy;
 
-    public void activateFacades(int scene)
+    public void say(string script)
     {
-        if(!isSaying)
+        setToRob();
+        base.say(script, "Rob");
+    }
+
+    private void setToRob()
+    {
+        if (isTod)
         {
-            // Set positions equal
-            otherPlayer.transform.position = otherFacade.transform.position;
-            thisFacade.transform.position = thisPlayer.transform.position;
-
-            // Activates the other player, inactivates the other player's facade
-            thisFacade.SetActive(true);
-            otherFacade.SetActive(true);
-
-            cameras[scene].SetActive(true);
-
-            // Activates the current player's facade, inactivates the current player
-            otherPlayer.SetActive(false);
-            thisPlayer.SetActive(false);
-        } else if(isSaying)
-        {
-
+            switchPlayer();
         }
     }
 
@@ -85,6 +72,8 @@ public class Player : Actor
         // Activates the current player's facade, inactivates the current player
         thisFacade.SetActive(true);
         thisPlayer.SetActive(false);
+
+        isTod = !isTod;
     }
 
     private void addToInventory(Collectable item) // Adds a given GameObject to a player's inventory
@@ -117,7 +106,7 @@ public class Player : Actor
 
     private void checkInput() // Checks for Input
     {
-        if (canMove) // If the player can move, check movement input
+        if (canMove && canInput) // If the player can move, check movement input
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * playerRunSpeed; // Set horizontal movement axis to the direction and magnitude of the horizontal input.
 
@@ -132,7 +121,7 @@ public class Player : Actor
         }
         
 
-        if (Input.GetButtonDown("Inventory")) // Flips the inventory display from on/off the screen when inventory input is checked
+        if (canInput && Input.GetButtonDown("Inventory")) // Flips the inventory display from on/off the screen when inventory input is checked
         {
             if(!isInventoryOn)
             {
@@ -142,11 +131,6 @@ public class Player : Actor
             {
                 displayInventory(false);
             }
-        }
-
-        if(Input.GetButtonDown("Enable Debug Button 1"))
-        {
-            say("i can talk");
         }
     }
 
@@ -202,11 +186,6 @@ public class Player : Actor
         displayInventory(false); // Initialize the player's inventory as inactive
 
         updateHealthDisplay(health); // Initially update the player's health display
-
-        foreach (GameObject g in cameras)
-        {
-            g.SetActive(false);
-        }
     }
 
     private void Start() // Called before the first frame update
@@ -217,6 +196,11 @@ public class Player : Actor
     private void Update() // Called once per frame
     {
         checkInput(); // Check for inputs
+
+        if (Input.GetButtonDown("Enable Debug Button 1"))
+        {
+            say("i can talk");
+        }
 
         checkStatus(); // Check for statuses
 

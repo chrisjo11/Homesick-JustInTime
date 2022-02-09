@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TextManager : MonoBehaviour
 {
     [SerializeField] private Text text;
+    private bool isActive;
 
     // Start is called before the first frame update
     void Start()
@@ -13,20 +14,23 @@ public class TextManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void displayMessage(string message)
     {
-        gameObject.SetActive(true);
+        if(!isActive)
+        {
+            gameObject.SetActive(true);
+            isActive = true;
+        }
+        
         text.text = message;
     }
 
     public void destroyMessage()
     {
-        gameObject.SetActive(false);
+        if(isActive)
+        {
+            gameObject.SetActive(false);
+            isActive = false;
+        }
     }
 }

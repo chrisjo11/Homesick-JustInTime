@@ -24,7 +24,15 @@ public class Enemy : Actor
 
     private void FixedUpdate() // Called based on elapsed time.
     {
-        move();
+        if(canMove && canInput)
+        {
+            move();
+        }
+    }
+
+    public void say(string script)
+    {
+        base.say(script, nametag);
     }
 
     private void move() // Moves the enemy back and forth through a low bound and high bound

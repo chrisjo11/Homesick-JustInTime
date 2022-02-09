@@ -5,9 +5,19 @@ using UnityEngine.UI;
 public class Actor : MonoBehaviour
 {
     protected bool isOnGround;
+    protected bool canMove = true;
+    protected static bool canInput = true;
+
     public static bool isSaying;
     public CharacterController2D controller; // Gets the movement controller
-    public TextManager textManager;
+    protected static TextManager textManager;
+
+    private void Start()
+    {
+        textManager = GameObject.FindGameObjectWithTag("TextManager").GetComponent<TextManager>();
+        canMove = true;
+        canInput = true;
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -25,17 +35,26 @@ public class Actor : MonoBehaviour
         }
     }
 
-    public void say(string message)
+    public static void startSaying()
     {
-        if (!isSaying)
+        isSaying = true;
+        canInput = false;
+    }
+
+    public static void stopSaying()
+    {
+        isSaying = false;
+        canInput = true;
+        textManager.destroyMessage();
+    }
+
+    protected void say(string script, string tag)
+    {
+        if(!isSaying)
         {
-            textManager.displayMessage(message);
-            isSaying = true;
-        } else if (isSaying)
-        {
-            isSaying = false;
-            textManager.destroyMessage();
+            startSaying();
         }
+        textManager.displayMessage(tag + ": " + script);
     }
 
     private void Update()

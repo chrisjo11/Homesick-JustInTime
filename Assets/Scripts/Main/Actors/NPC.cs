@@ -6,17 +6,8 @@ public class NPC : Actor
 {
     public string nametag;
 
-    // Start is called before the first frame update
-    void Start()
+    public void say(string script)
     {
-        
+        base.say(script, nametag);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 }
