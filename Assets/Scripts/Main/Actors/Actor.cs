@@ -61,6 +61,7 @@ public class Actor : MonoBehaviour
 
     protected void say(string script, string tag)
     {
+        stoppedSaying = false;
         if(!isSaying)
         {
             startSaying();

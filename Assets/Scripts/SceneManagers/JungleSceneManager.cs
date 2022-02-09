@@ -22,13 +22,13 @@ public class JungleSceneManager : MonoBehaviour
     private void finishScene(int scene)
     {
         Actor.stopSaying();
-        scenePos = 0; // Resets the scene position to 0
-        Scenes[0] = true;
+        scenePos = 1; // Resets the scene position to 1
+        Scenes[scene] = true;
     }
 
     private void runScene(int scene)
     {
-        Scenes[scene] = false;
+        Actor.startSaying();
     }
 
     private void Update()
@@ -46,7 +46,6 @@ public class JungleSceneManager : MonoBehaviour
     {
         if(rob.gameObject.transform.position.x > 25) // Condition for the scene to begin
         {
-            runScene(0);
             runScene(0); // run the scene
             if (Input.GetButtonDown("Skip"))
             {
@@ -75,9 +74,10 @@ public class JungleSceneManager : MonoBehaviour
 
     private void playScene1() // Replace 0 with the scene number
     {
-        runScene(0); // Replace 0 with the scene number
-        if(true) // Replace true with the condition that you need for the scene to play
+        if(rob.gameObject.transform.position.x > 40) // Replace true with the condition that you need for the scene to play
         {
+            //Debug.Log("bruh");
+            runScene(1); // Replace 0 with the scene number
             if (Input.GetButtonDown("Skip"))
             {
                 scenePos++;
@@ -85,19 +85,12 @@ public class JungleSceneManager : MonoBehaviour
             switch (scenePos)
             {
                 case 1:
-                    // First event
-                    break;
-
-                case 2:
-                    // Second event
-                    break;
-
-                case 3:
-                    // Keep adding more events with more cases
+                    Debug.Log("bruhhhh");
+                    rob.say("bruh");
                     break;
 
                 default:
-                    finishScene(0); // finishes the scene // Replace 0 with the scene number
+                    finishScene(1); // finishes the scene // Replace 0 with the scene number
                     break;
             }
         }
