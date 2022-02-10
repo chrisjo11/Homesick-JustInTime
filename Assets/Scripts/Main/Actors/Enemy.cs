@@ -13,11 +13,13 @@ public class Enemy : Actor
     public GameObject highBound;
 
     private int direction = 1;
+    private int health;
     private float lowX;
     private float highX;
 
     private void Start()
     {
+        health = maxHealth;
         lowX = lowBound.transform.position.x;
         highX = highBound.transform.position.x;
     }
@@ -27,6 +29,20 @@ public class Enemy : Actor
         if(canMove && canInput)
         {
             move();
+        }
+        checkDeath();
+    }
+
+    public void doDamage()
+    {
+        health--;
+    }
+
+    private void checkDeath()
+    {
+        if(health <= 0)
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -46,6 +62,5 @@ public class Enemy : Actor
         }
         Debug.Log(speed * direction);
         controller.Move(speed * direction * Time.deltaTime, false, false);
-
     }
 }

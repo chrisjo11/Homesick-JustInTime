@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : Actor
 {
+    // Attacking Enemies
+
+    public LayerMask enemy;
+
     // Player Booleans
 
     private bool isJumping;
@@ -15,6 +20,7 @@ public class Player : Actor
     private static int MAX_HEALTH = 20; // Sets the player's max health
     private static float playerRunSpeed = 60; // Sets the player's run speed
     private static bool isTod = false;
+    public static bool isAttacking = false;
 
     // Player Input Vars
 
@@ -40,6 +46,7 @@ public class Player : Actor
     public GameObject thisFacade;
 
     // Player Sounds
+
     public AudioSource ouch;
     public AudioSource speechNormal;
     public AudioSource speechAngry;
@@ -132,6 +139,16 @@ public class Player : Actor
                 displayInventory(false);
             }
         }
+
+        if (canInput && Input.GetButtonDown("Attack"))
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 3, enemy);
+            foreach(Collider2D col in colliders)
+            {
+                Debug.Log(col);
+                col.gameObject.GetComponent<Enemy>().doDamage();
+            }
+        }
     }
 
     private void checkStatus() // Checks the player's status 
@@ -171,8 +188,8 @@ public class Player : Actor
     }
 
     private void onLose() // called when the player has 0 or less health.
-    { 
-        Debug.Log("lmao you're trash");
+    {
+        SceneManager.LoadScene(8);
     }
 
     private void onDamage() // called when the player takes damage
@@ -197,14 +214,19 @@ public class Player : Actor
     {
         checkInput(); // Check for inputs
 
-        if (Input.GetButtonDown("Enable Debug Button 1"))
-        {
-            say("i can talk");
-        }
-
         checkStatus(); // Check for statuses
 
         updateStatus(); // Update statuses
+
+        if(isAttacking)
+        {
+            attack();
+        }
+    }
+
+    void attack()
+    {
+        
     }
 
     private void FixedUpdate() // Runs based on elapsed time

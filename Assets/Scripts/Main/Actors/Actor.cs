@@ -8,24 +8,28 @@ public class Actor : MonoBehaviour
     protected bool canMove = true;
     protected static bool canInput = true;
 
-    private static bool stoppedSaying = false;
+    private static bool stoppedSaying = true;
 
     public static bool isSaying;
     public CharacterController2D controller; // Gets the movement controller
     public TextManager textManager;
+    public GameObject textScreen;
 
     private void Start()
     {
-        //textManager = GameObject.FindGameObjectWithTag("TextManager").GetComponent<TextManager>();
         canMove = true;
         canInput = true;
+        textScreen.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         if(stoppedSaying)
         {
-            textManager.gameObject.SetActive(false);
+            textScreen.gameObject.SetActive(false);
+        } else
+        {
+            textScreen.gameObject.SetActive(true);
         }
     }
 
