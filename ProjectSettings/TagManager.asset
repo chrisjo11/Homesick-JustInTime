@@ -26,8 +26,8 @@ TagManager:
   - Ground
   - 
   - Obstacle
-  - 
-  - Item
+  - Collectable
+  - Powerup
   - Objective
   - 
   - Enemy

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Actor : MonoBehaviour
+public abstract class Actor : MonoBehaviour
 {
     protected bool isOnGround;
     protected bool canMove = true;

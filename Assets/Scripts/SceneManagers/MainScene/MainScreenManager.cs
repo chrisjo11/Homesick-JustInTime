@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MainScreenScript : MonoBehaviour
+public class MainScreenManager : MonoBehaviour
 {
     public GameObject screen;
 

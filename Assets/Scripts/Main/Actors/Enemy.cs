@@ -8,6 +8,7 @@ public class Enemy : Actor
     public float speed;
     public int maxHealth;
     public string nametag;
+    public TextMesh healthDisplay;
 
     public GameObject lowBound;
     public GameObject highBound;
@@ -31,11 +32,19 @@ public class Enemy : Actor
             move();
         }
         checkDeath();
+        healthDisplay.text = "Health: " + health;
+        if (direction == -1)
+        {
+            healthDisplay.gameObject.transform.localScale = new Vector3(-0.259786f, 0.259786f, 0.259786f);
+        } else
+        {
+            healthDisplay.gameObject.transform.localScale = new Vector3(0.259786f, 0.259786f, 0.259786f); 
+        }
     }
 
-    public void doDamage()
+    public void doDamage(int damage)
     {
-        health--;
+        health-=damage;
     }
 
     private void checkDeath()

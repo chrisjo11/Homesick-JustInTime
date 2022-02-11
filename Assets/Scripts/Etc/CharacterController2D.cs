@@ -41,6 +41,11 @@ public class CharacterController2D : MonoBehaviour
 			OnCrouchEvent = new BoolEvent();
 	}
 
+	public void increaseJumpForce(float amount)
+    {
+		m_JumpForce = amount;
+    }
+
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;

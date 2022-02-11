@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup : MonoBehaviour
+public abstract class Powerup : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract void onActive();
+    private void Update()
     {
-        
+        if (isActive)
+        {
+            onActive();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string name;
+    public bool isActive = false;
 }

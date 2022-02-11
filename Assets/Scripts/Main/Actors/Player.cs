@@ -6,37 +6,47 @@ using UnityEngine.SceneManagement;
 
 public class Player : Actor
 {
-    // Attacking Enemies
+    // GameObject References
 
-    public LayerMask enemy;
+    public LayerMask enemy; // Enemy layermask
+    public LayerMask collectable; // Item layermask
+    public LayerMask powerup; // powerup layermask
 
     // Player Booleans
 
-    private bool isJumping;
-    private bool tookDamage;
+    private bool isJumping; // Set to true if the player is jumping
+    private bool tookDamage; // Set to true if the player just took damage
 
     // Player Static Vars
 
     private static int MAX_HEALTH = 20; // Sets the player's max health
     private static float playerRunSpeed = 60; // Sets the player's run speed
-    private static bool isTod = false;
-    public static bool isAttacking = false;
+    public static bool isTod = false; // Set to true if the current player is Tod
+    public static bool isAttacking = false; // Set to true if the player is currently attacking
+    private static bool isMoving; // Set to true if the player is currently moving
+    public static int damageMultiplier = 1;
 
     // Player Input Vars
 
-    private float horizontalMove;
+    private float horizontalMove; // Input scalar for horizontal movement
 
     // Player Inventory
 
-    public GameObject inventoryDisplay;
+    public GameObject inventoryDisplay; // The current player's inventory display
     private List<Collectable> inventory = new List<Collectable>(); // List of the player's aquired GameObjects
-    private Collectable equippedItem;
-    private bool isInventoryOn;
+    private Collectable equippedItem; // The player's current equiped item
+    private bool isInventoryOn; // Set to true if the player currently has their inventory on
 
-    // Player healthDisplay
+    // Powerup Vars
 
-    private int health = MAX_HEALTH;
-    public TextMeshProUGUI healthDisplay;
+    public bool isJumpBoosted = false;
+    private int powerupTimer = (int) (6000*(60f/144f));
+
+    // Player HUD
+
+    private int health = MAX_HEALTH; // Player's current health
+    public GameObject jumpGreen;
+    public TextMeshProUGUI healthDisplay; // Player's health display
 
     // Two-player tree accesses
 
@@ -51,6 +61,75 @@ public class Player : Actor
     public AudioSource speechNormal;
     public AudioSource speechAngry;
     public AudioSource speechHappy;
+
+    public void activateGreenOverlay()
+    {
+        Debug.Log("running");
+        if(isJumpBoosted)
+        {
+            jumpGreen.SetActive(true);
+        } else
+        {
+            jumpGreen.SetActive(false);
+        }
+    }
+
+    private void resetJump()
+    {
+        powerupTimer--;
+        Debug.Log(powerupTimer);
+        if(powerupTimer <= 0)
+        {
+            powerupTimer = (int)(6000 * (60f / 144f));
+            isJumpBoosted = false;
+            controller.increaseJumpForce(1100);
+        }
+    }
+
+    private void getPowerups()
+    {
+        Collider2D[] colliders1 = Physics2D.OverlapCircleAll(gameObject.transform.position, 1, powerup);
+        foreach (Collider2D collider in colliders1)
+        {
+            collider.gameObject.GetComponent<Powerup>().isActive = true;
+        }
+    }
+
+    public void addHealth(int hearts)
+    {
+        health += hearts;
+        tookDamage = true;
+    }
+
+    public void increaseJump(float amount)
+    {
+        controller.increaseJumpForce(amount);
+    }
+
+    private void attack()
+    {
+        if(false)
+        {
+            
+        } else if(false)
+        {
+
+        }
+        else
+        {
+            useHand();
+        }
+    }
+
+    private void useHand()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 3, enemy);
+        foreach (Collider2D col in colliders)
+        {
+            Debug.Log(col);
+            col.gameObject.GetComponent<Enemy>().doDamage(1 * damageMultiplier);
+        }
+    }
 
     public void say(string script)
     {
@@ -105,10 +184,7 @@ public class Player : Actor
 
     private void updateHealthDisplay(int health) // Updates the player's current health display
     {
-        if(health >= 0)
-        {
-            healthDisplay.text = "Health: " + health;
-        }
+        if(health >= 0) healthDisplay.text = "Health: " + health;
     }
 
     private void checkInput() // Checks for Input
@@ -128,32 +204,23 @@ public class Player : Actor
         }
         
 
-        if (canInput && Input.GetButtonDown("Inventory")) // Flips the inventory display from on/off the screen when inventory input is checked
+        /*if (canInput && Input.GetButtonDown("Inventory")) // Flips the inventory display from on/off the screen when inventory input is checked
         {
-            if(!isInventoryOn)
-            {
-                displayInventory(true);
-            } 
-            else
-            {
-                displayInventory(false);
-            }
-        }
+            if (!isInventoryOn) displayInventory(true);
+            else displayInventory(false);
+        }*/
 
-        if (canInput && Input.GetButtonDown("Attack"))
-        {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 3, enemy);
-            foreach(Collider2D col in colliders)
-            {
-                Debug.Log(col);
-                col.gameObject.GetComponent<Enemy>().doDamage();
-            }
-        }
+        if (canInput && Input.GetButtonDown("Attack")) attack();
     }
 
     private void checkStatus() // Checks the player's status 
     {
         if(health <= 0) onLose(); // If the player's health is zero or lower, you lose.
+
+        if (horizontalMove == 0) Player.isMoving = false;
+        else Player.isMoving = true;
+
+        if (isJumpBoosted) resetJump();
     }
 
     private void updateStatus()
@@ -163,6 +230,8 @@ public class Player : Actor
             updateHealthDisplay(health);
             tookDamage = false;
         }
+
+        activateGreenOverlay();
     }
 
     private void OnCollisionEnter2D(Collision2D col) // Runs when the player collides with any other 2d Hitbox
@@ -203,9 +272,11 @@ public class Player : Actor
         displayInventory(false); // Initialize the player's inventory as inactive
 
         updateHealthDisplay(health); // Initially update the player's health display
+
+        activateGreenOverlay();
     }
 
-    private void Start() // Called before the first frame update
+    private void Start() // Called before the first frame update, after the script initializes
     {
         
     }
@@ -218,15 +289,7 @@ public class Player : Actor
 
         updateStatus(); // Update statuses
 
-        if(isAttacking)
-        {
-            attack();
-        }
-    }
-
-    void attack()
-    {
-        
+        getPowerups(); // Gets Powerups
     }
 
     private void FixedUpdate() // Runs based on elapsed time

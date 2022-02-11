@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Player rob;
+    public Player tod;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Sound that is played on pickup
+    public AudioSource onPickup;
 }
