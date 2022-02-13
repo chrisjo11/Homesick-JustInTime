@@ -35,10 +35,10 @@ public class Enemy : Actor
         healthDisplay.text = "Health: " + health;
         if (direction == -1)
         {
-            healthDisplay.gameObject.transform.localScale = new Vector3(-0.259786f, 0.259786f, 0.259786f);
+            healthDisplay.gameObject.transform.localScale = new Vector3(0.259786f, 0.259786f, 0.259786f);
         } else
         {
-            healthDisplay.gameObject.transform.localScale = new Vector3(0.259786f, 0.259786f, 0.259786f); 
+            healthDisplay.gameObject.transform.localScale = new Vector3(-0.259786f, 0.259786f, 0.259786f); 
         }
     }
 
@@ -69,7 +69,6 @@ public class Enemy : Actor
         {
             direction = 1;
         }
-        Debug.Log(speed * direction);
         controller.Move(speed * direction * Time.deltaTime, false, false);
     }
 }

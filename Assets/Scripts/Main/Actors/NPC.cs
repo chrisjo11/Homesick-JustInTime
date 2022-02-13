@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPC : Actor
 {
     public string nametag;
+    public Animator animator;
 
     public void say(string script)
     {

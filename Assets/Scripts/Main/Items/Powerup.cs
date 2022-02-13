@@ -12,7 +12,5 @@ public abstract class Powerup : Item
             onActive();
         }
     }
-
-    public string name;
     public bool isActive = false;
 }

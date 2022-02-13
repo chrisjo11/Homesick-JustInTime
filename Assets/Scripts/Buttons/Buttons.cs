@@ -18,21 +18,21 @@ public class Buttons : MonoBehaviour
 
     public void jungleButton()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void iceButton()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(6);
     }
 
     public void cityButton()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(8);
     }
 
     public void junkyardButton()
     {
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(10);
     }
 }

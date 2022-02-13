@@ -9,12 +9,12 @@ public class JumpMultiplier : Powerup
     {
         if (Player.isTod)
         {
-            tod.increaseJump(1600);
+            tod.increaseJump(1700);
             tod.isJumpBoosted = true;
         }
         else
         {
-            rob.increaseJump(1600);
+            rob.increaseJump(1700);
             rob.isJumpBoosted = true;
         }
         gameObject.SetActive(false);

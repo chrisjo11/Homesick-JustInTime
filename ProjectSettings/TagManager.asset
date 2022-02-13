@@ -16,6 +16,8 @@ TagManager:
   - Tod
   - MegaOrphan
   - TextManager
+  - Plate
+  - PlateDoor
   layers:
   - Default
   - TransparentFX

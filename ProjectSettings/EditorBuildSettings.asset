@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Misc/SettingsScreen.unity
     guid: 3e3b57f1acc6a0443b50b7b6486d87b0
+  - enabled: 1
+    path: Assets/Scenes/Worlds/W0_InitialRocketScene/W0_RocketScene.unity
+    guid: 24c788dcd603a2f4695a57c875d1de39
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -21,14 +24,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Worlds/W1_JungleWorld/L1_Jungle.unity
     guid: 47b36811dc23b07458a73510de7396f4
   - enabled: 1
+    path: Assets/Scenes/Worlds/W1_JungleWorld/W1_RocketScene.unity
+    guid: aaaec31c500bf154cbd6e55e6bf5f446
+  - enabled: 1
     path: Assets/Scenes/Worlds/W2_IceWorld/L1_Ice.unity
     guid: 8750c457a4b10b44d99e27d926a9ae56
+  - enabled: 1
+    path: Assets/Scenes/Worlds/W2_IceWorld/W2_RocketScene.unity
+    guid: 942d8d46306c47448af2e16f0e626a19
   - enabled: 1
     path: Assets/Scenes/Worlds/W3_CityWorld/L1_City.unity
     guid: 76a1191b2c5dd5f4683a60a1129ab20d
   - enabled: 1
+    path: Assets/Scenes/Worlds/W3_CityWorld/W3_RocketScene.unity
+    guid: 920c2d96405a1114fa972325426c8ed7
+  - enabled: 1
     path: Assets/Scenes/Worlds/W4_JunkyardWorld/L1_Junkyard.unity
     guid: 2a7b7fc957bcd894e836d21ff490eeab
+  - enabled: 0
+    path: Assets/Scenes/Worlds/W4_JunkyardWorld/W4_RocketScene.unity
+    guid: 8b6ac0928658b9146a185b0d9c1f3e30
   - enabled: 1
     path: Assets/Scenes/Misc/Credits.unity
     guid: 5e5fa6060cd8fb44eb032ee392b9599d
