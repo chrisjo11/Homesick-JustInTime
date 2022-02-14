@@ -57,7 +57,7 @@ public class Enemy : Actor
 
     public void say(string script)
     {
-        base.say(script, nametag);
+        base.say(script, nametag, textcolor);
     }
 
     private void move() // Moves the enemy back and forth through a low bound and high bound

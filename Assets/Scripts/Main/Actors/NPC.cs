@@ -9,6 +9,6 @@ public class NPC : Actor
 
     public void say(string script)
     {
-        base.say(script, nametag);
+        base.say(script, nametag, textcolor);
     }
 }

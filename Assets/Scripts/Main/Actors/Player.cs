@@ -36,6 +36,8 @@ public class Player : Actor
     private static bool isInteracting = false;
     private static bool isMoving;
     public static int damageMultiplier = 1;
+    private static bool isDebug = false;
+    private static float i = 0f;
 
     // Player Input Vars
 
@@ -44,7 +46,7 @@ public class Player : Actor
     // Powerup Vars
 
     public bool isJumpBoosted = false;
-    private int powerupTimer = (int) (6000*(60f/144f));
+    private float powerupTimer = 10;
 
     // Player HUD
 
@@ -79,7 +81,7 @@ public class Player : Actor
 
     private void resetJump()
     {
-        powerupTimer--;
+        powerupTimer-=Time.deltaTime;
         if(powerupTimer <= 0)
         {
             powerupTimer = (int)(6000 * (60f / 144f));
@@ -110,6 +112,7 @@ public class Player : Actor
 
     private void attack()
     {
+        isAttacking = true;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 3, enemy);
         foreach (Collider2D col in colliders)
         {
@@ -120,7 +123,7 @@ public class Player : Actor
     public void say(string script)
     {
         setToRob();
-        base.say(script, "Rob");
+        base.say(script, "Rob", textcolor);
     }
 
     private void setToRob()
@@ -176,6 +179,11 @@ public class Player : Actor
         if (canInput && Input.GetButtonDown("Attack")) attack();
 
         if (canInput && Input.GetButtonDown("Interact")) isInteracting = true; else isInteracting = false; 
+
+        if(Input.GetButtonDown("Debug"))
+        {
+            isDebug = !isDebug;
+        }
     }
 
     private void checkStatus() // Checks the player's status 
@@ -204,11 +212,30 @@ public class Player : Actor
         {
             animator.SetBool("moving", false);
         }
+
+        if (isAttacking) animator.SetBool("attacking", true); else animator.SetBool("attacking", false);
+        if(i - 0.35 >= 0 && isAttacking)
+        {
+            isAttacking = false;
+            i = 0f;
+        } else if(isAttacking)
+        {
+            Debug.Log(i);
+            i += Time.deltaTime;
+        }
+
+        if (isDebug) deBug();
+    }
+
+    private void deBug()
+    {
+        health = -1;
     }
 
     public void OnLanding()
     {
         animator.SetBool("jumping", false);
+        Debug.Log("landed");
     }
 
     private void updateStatus()
@@ -245,7 +272,13 @@ public class Player : Actor
 
     private void onLose() // called when the player has 0 or less health.
     {
-        SceneManager.LoadScene(12);
+        if(isDebug)
+        {
+            Debug.Log("you lost");
+        } else
+        {
+            SceneManager.LoadScene(12);
+        }
     }
 
     private void onWin()

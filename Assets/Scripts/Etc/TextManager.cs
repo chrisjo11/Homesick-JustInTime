@@ -14,14 +14,15 @@ public class TextManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void displayMessage(string message)
+    public void displayMessage(string message, Color color)
     {
-        if(!isActive)
+        text.color = color;
+        if (!isActive)
         {
             gameObject.SetActive(true);
             isActive = true;
         }
-        
+        Debug.Log(color);
         text.text = message;
     }
 

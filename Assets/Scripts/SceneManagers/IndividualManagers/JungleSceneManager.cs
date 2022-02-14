@@ -87,9 +87,6 @@ public class JungleSceneManager : MainManager
                 case 9:
                     rob.say("I will kill you");
                     break;
-                case 10:
-                    World.say("go east to find green.");
-                    break;
                 default:
                     finishScene(0); // finishes the scene
                     break;
@@ -168,19 +165,17 @@ public class JungleSceneManager : MainManager
                     break;
                 case 6:
                     blackScreen.SetActive(false);
-                    break;
-                case 7:
                     todFacade.gameObject.transform.position = new Vector3(255f, 0f, 0);
                     francide.gameObject.transform.position = new Vector3(260f, 0f, 0);
                     todFacade.say("i got the francide");
                     break;
-                case 8:
+                case 7:
                     todFacade.say("those cave trolls were not playing bro");
                     break;
-                case 9:
+                case 8:
                     todFacade.say("got the fuel tho");
                     break;
-                case 10:
+                case 9:
                     rob.say("alright, let's go back to the ship with the francide");
                     break;
 

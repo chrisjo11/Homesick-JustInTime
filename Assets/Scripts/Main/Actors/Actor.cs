@@ -14,6 +14,7 @@ public abstract class Actor : MonoBehaviour
     public CharacterController2D controller; // Gets the movement controller
     public TextManager textManager;
     public GameObject textScreen;
+    public Color textcolor;
 
     private void Start()
     {
@@ -63,13 +64,15 @@ public abstract class Actor : MonoBehaviour
         stoppedSaying = true;
     }
 
-    protected void say(string script, string tag)
+    protected void say(string script, string tag, Color color)
     {
         stoppedSaying = false;
         if(!isSaying)
         {
             startSaying();
         }
-        textManager.displayMessage(tag + ": " + script);
+
+        Debug.Log(color);
+        textManager.displayMessage(tag + ": " + script, color);
     }
 }

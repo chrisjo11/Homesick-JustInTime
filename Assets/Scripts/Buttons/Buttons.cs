@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
-    public void startButton()
+    public void selectButton()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void settingsButton()
+    public void startButton()
     {
         SceneManager.LoadScene(2);
     }

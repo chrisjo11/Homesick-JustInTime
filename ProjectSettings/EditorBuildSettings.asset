@@ -12,14 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Misc/MainLevelSelect.unity
     guid: fc38b0b6dfe38974f9f2c792dd2d3363
   - enabled: 1
-    path: Assets/Scenes/Misc/SettingsScreen.unity
-    guid: 3e3b57f1acc6a0443b50b7b6486d87b0
-  - enabled: 1
     path: Assets/Scenes/Worlds/W0_InitialRocketScene/W0_RocketScene.unity
     guid: 24c788dcd603a2f4695a57c875d1de39
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Misc/SettingsScreen.unity
+    guid: 3e3b57f1acc6a0443b50b7b6486d87b0
   - enabled: 1
     path: Assets/Scenes/Worlds/W1_JungleWorld/L1_Jungle.unity
     guid: 47b36811dc23b07458a73510de7396f4
@@ -42,8 +42,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Worlds/W4_JunkyardWorld/L1_Junkyard.unity
     guid: 2a7b7fc957bcd894e836d21ff490eeab
   - enabled: 0
-    path: Assets/Scenes/Worlds/W4_JunkyardWorld/W4_RocketScene.unity
-    guid: 8b6ac0928658b9146a185b0d9c1f3e30
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Misc/Credits.unity
     guid: 5e5fa6060cd8fb44eb032ee392b9599d
