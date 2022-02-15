@@ -277,6 +277,10 @@ public class Player : Actor
             Debug.Log("you lost");
         } else
         {
+            if (isTod)
+            {
+                switchPlayer();
+            }
             SceneManager.LoadScene(12);
         }
     }
